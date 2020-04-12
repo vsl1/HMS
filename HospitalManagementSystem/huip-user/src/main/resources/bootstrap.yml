@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: huip-user-server
+  cloud:
+    config:
+#      uri: ${CONFIG_SERVER_URL:http://localhost:8886}
+#      profile: dev
+      enabled: true
+      discovery:
+        enabled: true
+        service-id: huip-config-server
+#  rabbitmq:
+#    host: localhost
+#    port: 5672
+#    username: test
+#    password: test
+      
+eureka:
+  instance:
+    non-secure-port: ${server.port:8180}
+    prefer-ip-address: true
+    metadata-map:
+      instance-id: ${spring.application.name}:${random.value}
+  client:
+    service-url:
+      defaultZone: http://${eureka.host:localhost}:${eureka.port:8761}/eureka
+      

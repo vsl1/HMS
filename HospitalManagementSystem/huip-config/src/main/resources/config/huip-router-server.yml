@@ -1,0 +1,56 @@
+server:
+  port: 8080
+  
+spring:
+  mvc:
+    favicon:
+      enabled: false
+  output:
+    ansi:
+      enabled: DETECT
+  http:
+    encoding:
+      charset: UTF-8
+    multipart:
+      maxFileSize: -1
+      maxRequestSize: 500MB
+
+zuul:
+  addProxyHeaders: true
+  host:
+    socket-timeout-millis: 600000
+    connect-timeout-millis: 600000
+  routes:
+    
+    user-service:
+      path: /huipuser/**
+      sensitiveHeaders: 
+      serviceId: huip-user-server
+      stripPrefix: true
+    patient-service:
+      path: /huippatient/**
+      sensitiveHeaders: 
+      serviceId: huip-patient-server
+      stripPrefix: true
+      
+hystrix:
+  command:
+    myusers-service:
+      execution:
+        timeout:
+          enabled: false
+        isolation:
+          thread:
+            timeoutInMilliseconds: 600000
+            
+ribbon:
+  ConnectTimeout: 3000
+  ReadTimeout: 60000
+  eureka:
+    enabled: true
+
+# LOGGING
+logging:
+  level:
+    root: info
+    

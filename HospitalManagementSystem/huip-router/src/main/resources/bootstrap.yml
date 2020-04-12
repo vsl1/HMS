@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: huip-router-server
+  cloud:
+    config:
+      enabled: true
+      discovery:
+        enabled: true
+        service-id: huip-config-server
+      
+eureka:
+  instance:
+    non-secure-port: ${server.port:8080}
+    prefer-ip-address: true
+    metadata-map:
+      instance-id: ${spring.application.name}:${random.value}
+  client:
+    service-url:
+      defaultZone: http://${eureka.host:localhost}:${eureka.port:8761}/eureka
+      

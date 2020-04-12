@@ -1,0 +1,39 @@
+server:
+  port: 8886
+  
+spring:
+  application:
+    name: huip-config-server
+  profiles:
+    active: native
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: classpath:/config
+#        git:
+#          uri: *****************************
+#          username: *********
+#          password: *********
+#  rabbitmq:
+#    host: localhost
+#    port: 5672
+#    username: test
+#    password: test
+    
+management:
+  security:
+    enabled: false
+
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 10
+    statusPageUrlPath: /admin/info
+    healthCheckUrlPath: /admin/health
+    non-secure-port: ${server.port:8886}
+    prefer-ip-address: true
+    metadata-map:
+      instanceI-i: ${spring.application.name}:${random.value}
+  client:
+    service-url:
+      defaultZone: http://${eureka.host:localhost}:${eureka.port:8761}/eureka

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"></meta>
+	<title>授权</title>
+</head>
+<body>
+	<p><span th:text="${client}"></span> 程序想要请您授权以下内容：</p>
+	<form id="confirmationForm" name="confirmationForm" th:action="@{/oauth/authorize}" method="post">
+		<input name="user_oauth_approval" value="true" type="hidden" />
+		<div th:each="scope: ${scopes}">
+			<span th:text="${scope.key}">Some Scope</span>
+			<span>
+				<label>
+                    <input type="radio" th:name="${scope.key}" value="true" th:checked="${scope.value}"/> 许可
+                </label>
+                <label>
+                    <input type="radio" th:name="${scope.key}" value="false" th:checked="${!scope.value}"/> 拒绝
+                </label>
+			</span>
+		</div>
+        <button class="btn btn-primary" type="submit">确认并授权</button>
+	</form>
+	<p>请许可上述授权范围并点击确认并授权按钮继续。</p>
+</body>
+</html>

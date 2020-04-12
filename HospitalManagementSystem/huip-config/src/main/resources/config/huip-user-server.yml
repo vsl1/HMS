@@ -1,0 +1,61 @@
+server:
+  
+  port: 8180
+spring:
+  output:
+    ansi:
+      enabled: DETECT
+  http:
+    encoding:
+      charset: UTF-8
+    multipart:
+      maxFileSize: -1
+      maxRequestSize: 100MB
+  datasource:
+    
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/bhdemos?useUnicode=true&characterEncoding=utf8&useSSL=false&autoReconnect=true&createDatabaseIfNotExist=true
+   
+    username: root
+ 
+    password: root
+  jpa:
+    database: MYSQL
+   
+    show-sql: false
+   
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+    hibernate:
+     
+      ddl-auto: update
+    properties:
+      hibernate:
+       
+        format_sql: true
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: test
+    password: test
+  redis:
+    
+    database: 9
+   
+    host: localhost
+    
+    port: 6379
+   
+    password:    
+    timeout: 3600000
+  
+    jedis:
+      pool:      
+        max-active: -1       
+        max-idle: 200       
+        min-idle: 0
+        max-wait: -1
+      
+# LOGGING
+logging:
+  level:
+    root: info
